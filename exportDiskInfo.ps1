@@ -1,5 +1,5 @@
 ######################################################################################################################################################
-## Description: Script to create a CSV file with the disk informations of a Windows system (like disk name, free spoce, used space and total space)
+## Description: Script to create a CSV file with the disk informations of a Windows system (like disk name, free space, used space and total space)
 ##
 ## Author: Matteo Z.
 ######################################################################################################################################################
