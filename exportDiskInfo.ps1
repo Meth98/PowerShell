@@ -54,8 +54,8 @@ function retrieve_disk_info {
 		[string] $temp_string
 	)
 
-	# retrieve the IP address of the local system (excluding the loopback address)
-	$local_ip = @((Get-NetIPAddress -AddressState Preferred -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notlike "*Loopback*" }).IPAddress)
+	# retrieve the IP address of the local system (excluding the loopback address). It takes only the first result
+	$local_ip = @((Get-NetIPAddress -AddressState Preferred -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notlike "*Loopback*" } | Select-Object -First 1).IPAddress)
 	"Retrieving the fixed disk (DriveType = 3) informations of the $system ..." >> $log
 
 	# initialize the command variable to $null (equivalent to nonexistent value)
@@ -175,7 +175,7 @@ function copy_csv_to_remote_host {
 		if ($remote_path.Length -ne 0) {
 			Start-Sleep -Seconds 1
 
-			if (Test-Connection -Cn $remote_host -Quiet -Count 2) {
+			if (Test-Connection -ComputerName $remote_host -Quiet -Count 2) {
 				"Connection ok, the system is reachable!" >> $log
 				Write-Host -ForegroundColor "green" "$remote_host - Ping ok!"
 				Start-Sleep -Seconds 1
