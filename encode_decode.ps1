@@ -3,6 +3,7 @@
 ##
 ## Author: Matteo Z.
 ############################################################################################
+
 function Base64Encode {
         $encode = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($to_encode))
 
